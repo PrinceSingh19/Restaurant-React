@@ -9,7 +9,7 @@ function Main() {
 	const [selectedDish, updatedDish] = useState(null);
 
 	function onDishSelect(dishId) {
-		updatedDish((selectedDish) => ({
+		return updatedDish((selectedDish) => ({
 			...selectedDish,
 			selectedDish: dishId,
 		}));
