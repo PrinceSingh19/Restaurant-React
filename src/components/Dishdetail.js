@@ -19,7 +19,7 @@ export default class Dishdetail extends Component {
 	renderComments(comments) {
 		if (comments != null) {
 			return comments.map((comment) => {
-				const options = { year: "numeric", month: "short", day: "numeric" };
+				const options = { year: "numeric", month: "short", day: "2-digit" };
 				return (
 					<div key={comment.id}>
 						<ul className="list-unstyled">
