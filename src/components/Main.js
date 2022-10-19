@@ -1,37 +1,31 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Navbar, NavbarBrand } from "reactstrap";
 import Menu from "./Menu";
 import Dishdetail from "./Dishdetail";
 import { DISHES } from "../shared/dishes";
 
-class Main extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			dishes: DISHES,
-			selectedDish: null,
-		};
+function Main() {
+	const [dishes] = useState({ DISHES });
+	const [selectedDish, updatedDish] = useState(null);
+
+	function onDishSelect(dishId) {
+		updatedDish((selectedDish) => ({
+			...selectedDish,
+			selectedDish: dishId,
+		}));
 	}
 
-	onDishSelect(dishId) {
-		this.setState({ selectedDish: dishId });
-	}
-
-	render() {
-		return (
-			<div>
-				<Navbar dark color="primary">
-					<NavbarBrand href="./" className="mx-5">
-						Ristorante De Confusion
-					</NavbarBrand>
-				</Navbar>
-				<Menu dishes={this.state.dishes} onClick={(dishId) => this.onDishSelect(dishId)} />
-				<Dishdetail
-					dish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish)[0]}
-				/>
-			</div>
-		);
-	}
+	return (
+		<div>
+			<Navbar dark color="primary">
+				<NavbarBrand href="./" className="mx-5">
+					Ristorante De Confusion
+				</NavbarBrand>
+			</Navbar>
+			<Menu dishes={dishes} onClick={(dishId) => onDishSelect(dishId)} />
+			<Dishdetail dish={dishes.filter((dish) => dish.id === selectedDish)[0]} />
+		</div>
+	);
 }
 
 export default Main;
