@@ -5,15 +5,7 @@ import Dishdetail from "./Dishdetail";
 import { DISHES } from "../shared/dishes";
 
 function Main() {
-	const [dishes] = useState({ DISHES });
-	const [selectedDish, updatedDish] = useState(null);
-
-	function onDishSelect(dishId) {
-		return updatedDish((selectedDish) => ({
-			...selectedDish,
-			selectedDish: dishId,
-		}));
-	}
+	const [selectedDish, setSelectedDish] = useState(null);
 
 	return (
 		<div>
@@ -22,8 +14,8 @@ function Main() {
 					Ristorante De Confusion
 				</NavbarBrand>
 			</Navbar>
-			<Menu dishes={dishes} onClick={(dishId) => onDishSelect(dishId)} />
-			<Dishdetail dish={dishes.filter((dish) => dish.id === selectedDish)[0]} />
+			<Menu dishes={DISHES} onClick={(dishId) => setSelectedDish(dishId)} />
+			<Dishdetail dish={DISHES.filter((dish) => dish.id === selectedDish)[0]} />
 		</div>
 	);
 }
