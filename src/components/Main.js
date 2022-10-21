@@ -6,9 +6,9 @@ import { DISHES } from "../shared/dishes";
 
 function Main() {
 	const [state, setState] = useState({ selectedDish: null });
-	function onDishSelect(dishId) {
+	/* function onDishSelect(dishId) {
 		setState({ ...state, selectedDish: dishId });
-	}
+	} */
 
 	return (
 		<div>
@@ -17,7 +17,7 @@ function Main() {
 					Ristorante De Confusion
 				</NavbarBrand>
 			</Navbar>
-			<Menu dishes={DISHES} onClick={(dishId) => onDishSelect(dishId)} />
+			<Menu dishes={DISHES} onClick={(dishId) => setState({ selectedDish: dishId })} />
 			<Dishdetail dish={DISHES.filter((dish) => dish.id === state.selectedDish)[0]} />
 		</div>
 	);
