@@ -21,9 +21,9 @@ export default class Header extends Component {
 		return (
 			<>
 				<Navbar dark color="jumbotron" expand="md">
-					<div className="container">
+					<div className="container d-flex mr-auto">
 						<NavbarToggler onClick={this.toggleNav} />
-						<NavbarBrand className="mr-auto" href="./">
+						<NavbarBrand href="./">
 							<img
 								src="assets/images/logo.png"
 								height="30"
