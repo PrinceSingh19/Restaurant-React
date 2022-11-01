@@ -76,13 +76,9 @@ h3 > a {
 }
 
 .modal-content .modal-header {
-	background: #512da8;
-}
-
-.modal-content .modal-header .btn-close {
-	background: floralwhite;
+	background: none;
 }
 
 .modal-content .modal-body {
-	background: #9575cd;
+	background: none;
 }
