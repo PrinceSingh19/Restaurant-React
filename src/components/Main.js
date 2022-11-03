@@ -4,22 +4,11 @@ import Menu from "./Menu";
 import Header from "./Header";
 import Footer from "./Footer";
 import Dishdetail from "./Dishdetail";
-import { DISHES } from "../shared/dishes";
 import { Routes, Route, Navigate, useParams } from "react-router-dom";
 import Contact from "./Contact";
 import Aboutus from "./Aboutus";
-import { COMMENTS } from "../shared/comments";
-import { PROMOTIONS } from "../shared/promotions";
-import { LEADERS } from "../shared/leaders";
 
 function Main() {
-	const [state] = useState({
-		dishes: DISHES,
-		comments: COMMENTS,
-		promotions: PROMOTIONS,
-		leaders: LEADERS,
-	});
-
 	const DishWithId = () => {
 		let { dishId } = useParams();
 		return (
