@@ -1,11 +1,8 @@
 import React from "react";
-import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from "reactstrap";
+import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader } from "reactstrap";
 import { Link } from "react-router-dom";
 
 function Aboutus(props) {
-	const leaders = props.leaders.map((leader) => {
-		return <p key={leader.id}>Leader {leader.name}</p>;
-	});
 	const RenderLeader = ({ leadersDesc }) => {
 		const leaderDescription = leadersDesc.map((leader) => {
 			return (
