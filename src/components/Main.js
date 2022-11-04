@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Home from "./Home";
 import Menu from "./Menu";
 import Header from "./Header";
@@ -7,14 +7,17 @@ import Dishdetail from "./Dishdetail";
 import { Routes, Route, Navigate, useParams } from "react-router-dom";
 import Contact from "./Contact";
 import Aboutus from "./Aboutus";
+import { useSelector } from "react-redux";
 
 function Main() {
+	const { dishes, comments, promotions, leaders } = useSelector((state) => state.states);
+
 	const DishWithId = () => {
 		let { dishId } = useParams();
 		return (
 			<Dishdetail
-				dish={state.dishes.filter((dish) => dish.id === parseInt(dishId, 10))[0]}
-				comments={state.comments.filter((comment) => comment.dishId === parseInt(dishId, 10))}
+				dish={dishes.filter((dish) => dish.id === parseInt(dishId, 10))[0]}
+				comments={comments.filter((comment) => comment.dishId === parseInt(dishId, 10))}
 			/>
 		);
 	};
@@ -26,16 +29,16 @@ function Main() {
 					path="/home"
 					element={
 						<Home
-							dish={state.dishes.filter((dish) => dish.featured)[0]}
-							promotion={state.promotions.filter((promo) => promo.featured)[0]}
-							leader={state.leaders.filter((leader) => leader.featured)[0]}
+							dish={dishes.filter((dish) => dish.featured)[0]}
+							promotion={promotions.filter((promo) => promo.featured)[0]}
+							leader={leaders.filter((leader) => leader.featured)[0]}
 						/>
 					}
 				/>
-				<Route exact path="/menu" element={<Menu dishes={state.dishes} />} />
+				<Route exact path="/menu" element={<Menu dishes={dishes} />} />
 				<Route exact path="/menu/:dishId" element={<DishWithId />} />
 				<Route path="/contactus" element={<Contact />} />
-				<Route path="/aboutus" element={<Aboutus leaders={state.leaders} />} />
+				<Route path="/aboutus" element={<Aboutus leaders={leaders} />} />
 				<Route path="/" element={<Navigate replace to="/home" />} />
 			</Routes>
 			<Footer />
