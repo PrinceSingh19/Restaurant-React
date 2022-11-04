@@ -40,7 +40,7 @@ function RenderComments({ comments }) {
 			);
 		});
 	} else {
-		<div></div>;
+		return <div></div>;
 	}
 }
 const Dishdetail = (props) => {
@@ -72,7 +72,7 @@ const Dishdetail = (props) => {
 			</div>
 		);
 	} else {
-		<div></div>;
+		return <div></div>;
 	}
 };
 
