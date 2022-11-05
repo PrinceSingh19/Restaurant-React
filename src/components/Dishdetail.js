@@ -9,6 +9,7 @@ import {
 	BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import SubmitComment from "./SubmitComment";
 
 function RenderDish({ dish }) {
 	return (
@@ -23,7 +24,13 @@ function RenderDish({ dish }) {
 		</div>
 	);
 }
-
+/* const renderSubmitComment = () => {
+	return (
+		<>
+			<SubmitComment />
+		</>
+	);
+}; */
 function RenderComments({ comments }) {
 	if (comments != null) {
 		return comments.map((comment) => {
@@ -40,7 +47,7 @@ function RenderComments({ comments }) {
 			);
 		});
 	} else {
-		<div></div>;
+		return <div></div>;
 	}
 }
 const Dishdetail = (props) => {
@@ -67,12 +74,16 @@ const Dishdetail = (props) => {
 					<div className="col-12 col-sm-5 col-md-5 m-1">
 						<h4>Comments</h4>
 						<RenderComments comments={props.comments} />
+						{/* 	<button className="btn btn-secondary" onClick={renderSubmitComment}>
+							Submit Comment
+						</button> */}
+						<SubmitComment />
 					</div>
 				</div>
 			</div>
 		);
 	} else {
-		<div></div>;
+		return <div></div>;
 	}
 };
 
