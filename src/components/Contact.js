@@ -1,13 +1,5 @@
 import React from "react";
-import {
-	Breadcrumb,
-	BreadcrumbItem,
-	Button,
-	FormGroup,
-	Label,
-	Col,
-	FormFeedback,
-} from "reactstrap";
+import { Breadcrumb, BreadcrumbItem, Button, FormGroup, Label, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -16,9 +8,13 @@ const Contact = () => {
 		register,
 		formState: { errors },
 		handleSubmit,
+		reset,
 	} = useForm();
-	console.log(errors);
-	const onSubmit = (data) => console.log(data);
+
+	const onSubmit = (data) => {
+		console.log(data);
+		reset();
+	};
 	return (
 		<div className="container">
 			<div className="row">
@@ -94,8 +90,6 @@ const Contact = () => {
 								/>
 								<small className="form-text text-danger">
 									{errors.firstname?.type === "required" && "This field is required"}
-								</small>
-								<small className="form-text text-danger">
 									{errors.firstname?.type === "minLength" && "Min 4 character are needed"}
 								</small>
 							</div>
@@ -114,13 +108,11 @@ const Contact = () => {
 									className="form-control"
 									autoComplete="off"
 									defaultValue=""
-									{...register("lastname")}
+									{...register("lastname", { required: true, minLength: "4" })}
 								/>
 								<small className="form-text text-danger">
-									{errors.firstname?.type === "required" && "This field is required"}
-								</small>
-								<small className="form-text text-danger">
-									{errors.firstname?.type === "minLength" && "Min 4 character are needed"}
+									{errors.lastname?.type === "required" && "This field is required"}
+									{errors.lastname?.type === "minLength" && "Min 4 character are needed"}
 								</small>
 							</Col>
 						</FormGroup>
@@ -137,13 +129,18 @@ const Contact = () => {
 									className="form-control"
 									autoComplete="off"
 									defaultValue=""
-									{...register("telnum")}
+									{...register("telnum", {
+										required: true,
+										pattern: /^[0-9]+$/g,
+										minLength: "2",
+										maxLength: "10",
+									})}
 								/>
 								<small className="form-text text-danger">
-									{errors.firstname?.type === "required" && "This field is required"}
-								</small>
-								<small className="form-text text-danger">
-									{errors.firstname?.type === "minLength" && "Min 4 character are needed"}
+									{errors.telnum?.type === "pattern" && "only numbers are allowed"}
+									{errors.telnum?.type === "required" && "This field is required"}
+									{errors.telnum?.type === "minLength" && "Min 2 numbers are needed"}
+									{errors.telnum?.type === "maxLength" && "Max 10 numbers are needed"}
 								</small>
 							</Col>
 						</FormGroup>
@@ -160,13 +157,14 @@ const Contact = () => {
 									className="form-control"
 									autoComplete="off"
 									defaultValue=""
-									{...register("email")}
+									{...register("email", {
+										required: true,
+										pattern: /^[(\w\d\W)+]+@+[(\w)+]+\.+[\w+]+$/g,
+									})}
 								/>
 								<small className="form-text text-danger">
-									{errors.firstname?.type === "required" && "This field is required"}
-								</small>
-								<small className="form-text text-danger">
-									{errors.firstname?.type === "minLength" && "Min 4 character are needed"}
+									{errors.email?.type === "required" && "This field is required"}
+									{errors.email?.type === "pattern" && "Please enter valid email address"}
 								</small>
 							</Col>
 						</FormGroup>
