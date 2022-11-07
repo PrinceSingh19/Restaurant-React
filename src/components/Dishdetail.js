@@ -10,6 +10,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import SubmitComment from "./SubmitComment";
+import { useSelector } from "react-redux";
 
 function RenderDish({ dish }) {
 	return (
@@ -24,33 +25,36 @@ function RenderDish({ dish }) {
 		</div>
 	);
 }
-/* const renderSubmitComment = () => {
-	return (
-		<>
-			<SubmitComment />
-		</>
-	);
-}; */
-function RenderComments({ comments }) {
+
+function RenderComments({ comments, commentsName }) {
 	if (comments != null) {
-		return comments.map((comment) => {
-			const options = { year: "numeric", month: "short", day: "2-digit" };
-			return (
-				<div key={comment.id}>
-					<ul className="list-unstyled">
-						<li>{comment.comment}</li>
-						<li>
-							--{comment.author} {new Date(comment.date).toLocaleDateString("en-us", options)}
-						</li>
-					</ul>
+		return (
+			<>
+				<div>
+					{comments.map((comment) => {
+						const options = { year: "numeric", month: "short", day: "2-digit" };
+						return (
+							<div key={comment.id}>
+								<ul className="list-unstyled">
+									<li>{comment.comment}</li>
+									<li>
+										--{comment.author} {new Date(comment.date).toLocaleDateString("en-us", options)}
+									</li>
+								</ul>
+							</div>
+						);
+					})}
+					<SubmitComment />
 				</div>
-			);
-		});
+			</>
+		);
 	} else {
 		return <div></div>;
 	}
 }
 const Dishdetail = (props) => {
+	const { comments } = useSelector((state) => state.comments);
+	console.log(comments);
 	if (props.dish != null) {
 		return (
 			<div className="container ">
@@ -73,11 +77,10 @@ const Dishdetail = (props) => {
 
 					<div className="col-12 col-sm-5 col-md-5 m-1">
 						<h4>Comments</h4>
-						<RenderComments comments={props.comments} />
+						<RenderComments comments={props.comments} commentsName={comments} />
 						{/* 	<button className="btn btn-secondary" onClick={renderSubmitComment}>
 							Submit Comment
 						</button> */}
-						<SubmitComment />
 					</div>
 				</div>
 			</div>

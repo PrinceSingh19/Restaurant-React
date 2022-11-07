@@ -4,9 +4,9 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
 	leaders: LEADERS,
 };
-export const stateSlice = createSlice({
+export const leadersSlice = createSlice({
 	name: "leaders",
 	initialState,
 });
 
-export default stateSlice.reducer;
+export default leadersSlice.reducer;
