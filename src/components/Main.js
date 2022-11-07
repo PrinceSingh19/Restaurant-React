@@ -10,7 +10,10 @@ import Aboutus from "./Aboutus";
 import { useSelector } from "react-redux";
 
 function Main() {
-	const { dishes, comments, promotions, leaders } = useSelector((state) => state.states);
+	const { dishes } = useSelector((state) => state.dishes);
+	const { leaders } = useSelector((state) => state.leaders);
+	const { promotions } = useSelector((state) => state.promotions);
+	const { comments } = useSelector((state) => state.comments);
 
 	const DishWithId = () => {
 		let { dishId } = useParams();
