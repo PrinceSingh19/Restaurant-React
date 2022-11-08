@@ -24,19 +24,13 @@ function RenderDish({ dish }) {
 		</div>
 	);
 }
-/* const renderSubmitComment = () => {
-	return (
-		<>
-			<SubmitComment />
-		</>
-	);
-}; */
-function RenderComments({ comments }) {
+
+function RenderComments({ comments, commentsName }) {
+	const dishId = comments.map((x) => x.dishId)[0];
 	if (comments != null) {
 		return (
 			<>
 				<div>
-					<h4>Comments</h4>
 					{comments.map((comment) => {
 						const options = { year: "numeric", month: "short", day: "2-digit" };
 						return (
@@ -50,7 +44,7 @@ function RenderComments({ comments }) {
 							</div>
 						);
 					})}
-					<SubmitComment />
+					<SubmitComment dishId={dishId} />
 				</div>
 			</>
 		);
@@ -81,6 +75,9 @@ const Dishdetail = (props) => {
 
 					<div className="col-12 col-sm-5 col-md-5 m-1">
 						<RenderComments comments={props.comments} />
+						{/* 	<button className="btn btn-secondary" onClick={renderSubmitComment}>
+							Submit Comment
+						</button> */}
 					</div>
 				</div>
 			</div>
