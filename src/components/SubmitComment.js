@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
+import { addComment } from "../redux/stateSlices/commentsSlice";
 
-function SubmitComment() {
+function SubmitComment(props) {
 	const [modal, setModal] = useState(false);
-
+	const dispatch = useDispatch();
+	const dishId = props.dishId;
 	const toggle = () => setModal(!modal);
 	const {
 		register,
 		formState: { errors },
 		handleSubmit,
-		reset,
 	} = useForm();
 
 	const onSubmit = (data) => {
 		console.log(data);
-		reset();
+		const { rating, author, comment } = data;
+		dispatch(addComment({ dishId, rating, author, comment }));
 	};
 
 	return (
@@ -46,7 +49,7 @@ function SubmitComment() {
 								</select>
 							</div>
 							<div className="mb-3">
-								<label htmlFor="name" className="form-label">
+								<label htmlFor="author" className="form-label">
 									Your Name
 								</label>
 								<input
@@ -54,8 +57,8 @@ function SubmitComment() {
 									className="form-control"
 									id="name"
 									placeholder="Your Name"
-									name="name"
-									{...register("name", { required: true, maxLength: "15" })}
+									name="author"
+									{...register("author", { required: true, maxLength: "15" })}
 								/>
 								<small className="form-text text-danger">
 									{errors.name?.type === "required" && "This field is required"}

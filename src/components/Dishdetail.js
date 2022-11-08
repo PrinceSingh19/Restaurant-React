@@ -24,28 +24,30 @@ function RenderDish({ dish }) {
 		</div>
 	);
 }
-/* const renderSubmitComment = () => {
-	return (
-		<>
-			<SubmitComment />
-		</>
-	);
-}; */
-function RenderComments({ comments }) {
+
+function RenderComments({ comments, commentsName }) {
+	const dishId = comments.map((x) => x.dishId)[0];
 	if (comments != null) {
-		return comments.map((comment) => {
-			const options = { year: "numeric", month: "short", day: "2-digit" };
-			return (
-				<div key={comment.id}>
-					<ul className="list-unstyled">
-						<li>{comment.comment}</li>
-						<li>
-							--{comment.author} {new Date(comment.date).toLocaleDateString("en-us", options)}
-						</li>
-					</ul>
+		return (
+			<>
+				<div>
+					{comments.map((comment) => {
+						const options = { year: "numeric", month: "short", day: "2-digit" };
+						return (
+							<div key={comment.id}>
+								<ul className="list-unstyled">
+									<li>{comment.comment}</li>
+									<li>
+										--{comment.author} {new Date(comment.date).toLocaleDateString("en-us", options)}
+									</li>
+								</ul>
+							</div>
+						);
+					})}
+					<SubmitComment dishId={dishId} />
 				</div>
-			);
-		});
+			</>
+		);
 	} else {
 		return <div></div>;
 	}
@@ -72,12 +74,10 @@ const Dishdetail = (props) => {
 					</div>
 
 					<div className="col-12 col-sm-5 col-md-5 m-1">
-						<h4>Comments</h4>
 						<RenderComments comments={props.comments} />
 						{/* 	<button className="btn btn-secondary" onClick={renderSubmitComment}>
 							Submit Comment
 						</button> */}
-						<SubmitComment />
 					</div>
 				</div>
 			</div>
