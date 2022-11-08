@@ -14,7 +14,6 @@ function Main() {
 	const { leaders } = useSelector((state) => state.leaders);
 	const { promotions } = useSelector((state) => state.promotions);
 	const { comments } = useSelector((state) => state.comments);
-
 	const DishWithId = () => {
 		let { dishId } = useParams();
 		return (

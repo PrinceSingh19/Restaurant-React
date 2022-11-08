@@ -4,22 +4,21 @@ import { useDispatch } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
 import { addComment } from "../redux/stateSlices/commentsSlice";
 
-function SubmitComment() {
+function SubmitComment(props) {
 	const [modal, setModal] = useState(false);
 	const dispatch = useDispatch();
-
+	const dishId = props.dishId;
 	const toggle = () => setModal(!modal);
 	const {
 		register,
 		formState: { errors },
 		handleSubmit,
-		reset,
 	} = useForm();
 
 	const onSubmit = (data) => {
 		console.log(data);
 		const { rating, author, comment } = data;
-		dispatch(addComment(rating, author, comment));
+		dispatch(addComment({ dishId, rating, author, comment }));
 	};
 
 	return (

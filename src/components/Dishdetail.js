@@ -10,7 +10,6 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import SubmitComment from "./SubmitComment";
-import { useSelector } from "react-redux";
 
 function RenderDish({ dish }) {
 	return (
@@ -27,6 +26,7 @@ function RenderDish({ dish }) {
 }
 
 function RenderComments({ comments, commentsName }) {
+	const dishId = comments.map((x) => x.dishId)[0];
 	if (comments != null) {
 		return (
 			<>
@@ -44,7 +44,7 @@ function RenderComments({ comments, commentsName }) {
 							</div>
 						);
 					})}
-					<SubmitComment />
+					<SubmitComment dishId={dishId} />
 				</div>
 			</>
 		);
@@ -53,8 +53,6 @@ function RenderComments({ comments, commentsName }) {
 	}
 }
 const Dishdetail = (props) => {
-	const { comments } = useSelector((state) => state.comments);
-	console.log(comments);
 	if (props.dish != null) {
 		return (
 			<div className="container ">
@@ -77,7 +75,7 @@ const Dishdetail = (props) => {
 
 					<div className="col-12 col-sm-5 col-md-5 m-1">
 						<h4>Comments</h4>
-						<RenderComments comments={props.comments} commentsName={comments} />
+						<RenderComments comments={props.comments} />
 						{/* 	<button className="btn btn-secondary" onClick={renderSubmitComment}>
 							Submit Comment
 						</button> */}
