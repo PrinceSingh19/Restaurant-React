@@ -1,5 +1,5 @@
 import { COMMENTS } from "../../shared/comments";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = {
 	comments: COMMENTS,
@@ -18,7 +18,7 @@ export const commentsSlice = createSlice({
 					payload: {
 						...value,
 						date: new Date().toISOString(),
-						id: Math.random(),
+						id: nanoid(),
 					},
 				};
 			},
