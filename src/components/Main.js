@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Home from "./Home";
 import Menu from "./Menu";
 import Header from "./Header";
@@ -7,13 +7,23 @@ import Dishdetail from "./Dishdetail";
 import { Routes, Route, Navigate, useParams } from "react-router-dom";
 import Contact from "./Contact";
 import Aboutus from "./Aboutus";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getDishes } from "../redux/stateSlices/dishesSlice";
+import { Loading } from "./Loading";
 
 function Main() {
-	const { dishes } = useSelector((state) => state.dishes);
+	const { dishes, isLoading } = useSelector((state) => state.dishes);
 	const { leaders } = useSelector((state) => state.leaders);
 	const { promotions } = useSelector((state) => state.promotions);
 	const { comments } = useSelector((state) => state.comments);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		setTimeout(() => {
+			dispatch(getDishes());
+		}, 2000);
+		//eslint-disable-next-line
+	}, []);
 	const DishWithId = () => {
 		let { dishId } = useParams();
 		return (
@@ -23,6 +33,9 @@ function Main() {
 			/>
 		);
 	};
+	if (isLoading) {
+		return <Loading />;
+	}
 	return (
 		<div>
 			<Header />
