@@ -1,5 +1,15 @@
 import React from "react";
-import { Card, CardBody, CardImg, CardText, CardTitle } from "reactstrap";
+import {
+	Card,
+	CardBody,
+	CardImg,
+	CardText,
+	CardTitle,
+	Breadcrumb,
+	BreadcrumbItem,
+} from "reactstrap";
+import { Link } from "react-router-dom";
+import SubmitComment from "./SubmitComment";
 
 function RenderDish({ dish }) {
 	return (
@@ -15,43 +25,65 @@ function RenderDish({ dish }) {
 	);
 }
 
-function RenderComments({ comments }) {
+function RenderComments({ comments, commentsName }) {
+	const dishId = comments.map((x) => x.dishId)[0];
 	if (comments != null) {
-		return comments.map((comment) => {
-			const options = { year: "numeric", month: "short", day: "2-digit" };
-			return (
-				<div key={comment.id}>
-					<ul className="list-unstyled">
-						<li>{comment.comment}</li>
-						<li>
-							--{comment.author} {new Date(comment.date).toLocaleDateString("en-us", options)}
-						</li>
-					</ul>
+		return (
+			<>
+				<div>
+					{comments.map((comment) => {
+						const options = { year: "numeric", month: "short", day: "2-digit" };
+						return (
+							<div key={comment.id}>
+								<ul className="list-unstyled">
+									<li>{comment.comment}</li>
+									<li>
+										--{comment.author} {new Date(comment.date).toLocaleDateString("en-us", options)}
+									</li>
+								</ul>
+							</div>
+						);
+					})}
+					<SubmitComment dishId={dishId} />
 				</div>
-			);
-		});
+			</>
+		);
 	} else {
-		<div></div>;
+		return <div></div>;
 	}
 }
 const Dishdetail = (props) => {
 	if (props.dish != null) {
 		return (
 			<div className="container ">
+				<div className="row">
+					<Breadcrumb>
+						<BreadcrumbItem>
+							<Link to="/menu">Menu</Link>
+						</BreadcrumbItem>
+						<BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+					</Breadcrumb>
+					<div className="col-12">
+						<h3>{props.dish.name}</h3>
+						<hr />
+					</div>
+				</div>
 				<div className="row ">
 					<div className="col-12 col-sm-5 col-md-5 m-1">
 						<RenderDish dish={props.dish} />
 					</div>
 
 					<div className="col-12 col-sm-5 col-md-5 m-1">
-						<h4>Comments</h4>
-						<RenderComments comments={props.dish.comments} />
+						<RenderComments comments={props.comments} />
+						{/* 	<button className="btn btn-secondary" onClick={renderSubmitComment}>
+							Submit Comment
+						</button> */}
 					</div>
 				</div>
 			</div>
 		);
 	} else {
-		<div></div>;
+		return <div></div>;
 	}
 };
 

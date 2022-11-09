@@ -1,24 +1,49 @@
-import React, { useState } from "react";
-import { Navbar, NavbarBrand } from "reactstrap";
+import React from "react";
+import Home from "./Home";
 import Menu from "./Menu";
+import Header from "./Header";
+import Footer from "./Footer";
 import Dishdetail from "./Dishdetail";
-import { DISHES } from "../shared/dishes";
+import { Routes, Route, Navigate, useParams } from "react-router-dom";
+import Contact from "./Contact";
+import Aboutus from "./Aboutus";
+import { useSelector } from "react-redux";
 
 function Main() {
-	const [state, setState] = useState({ selectedDish: null });
-	/* function onDishSelect(dishId) {
-		setState({ ...state, selectedDish: dishId });
-	} */
-
+	const { dishes } = useSelector((state) => state.dishes);
+	const { leaders } = useSelector((state) => state.leaders);
+	const { promotions } = useSelector((state) => state.promotions);
+	const { comments } = useSelector((state) => state.comments);
+	const DishWithId = () => {
+		let { dishId } = useParams();
+		return (
+			<Dishdetail
+				dish={dishes.filter((dish) => dish.id === parseInt(dishId, 10))[0]}
+				comments={comments.filter((comment) => comment.dishId === parseInt(dishId, 10))}
+			/>
+		);
+	};
 	return (
 		<div>
-			<Navbar dark color="primary">
-				<NavbarBrand href="./" className="mx-5">
-					Ristorante De Confusion
-				</NavbarBrand>
-			</Navbar>
-			<Menu dishes={DISHES} onClick={(dishId) => setState({ selectedDish: dishId })} />
-			<Dishdetail dish={DISHES.filter((dish) => dish.id === state.selectedDish)[0]} />
+			<Header />
+			<Routes>
+				<Route
+					path="/home"
+					element={
+						<Home
+							dish={dishes.filter((dish) => dish.featured)[0]}
+							promotion={promotions.filter((promo) => promo.featured)[0]}
+							leader={leaders.filter((leader) => leader.featured)[0]}
+						/>
+					}
+				/>
+				<Route exact path="/menu" element={<Menu dishes={dishes} />} />
+				<Route exact path="/menu/:dishId" element={<DishWithId />} />
+				<Route path="/contactus" element={<Contact />} />
+				<Route path="/aboutus" element={<Aboutus leaders={leaders} />} />
+				<Route path="/" element={<Navigate replace to="/home" />} />
+			</Routes>
+			<Footer />
 		</div>
 	);
 }
