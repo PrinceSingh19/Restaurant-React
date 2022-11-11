@@ -1,22 +1,6 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from "reactstrap";
-import { getDishes } from "../redux/stateSlices/dishesSlice";
-import { Loading } from "./Loading";
-function RenderCard({ item, isLoading, errMsg }) {
-	if (isLoading) {
-		return (
-			<>
-				<div className="container">
-					<div className="row">
-						<Loading />
-					</div>
-				</div>
-			</>
-		);
-	} else if (errMsg) {
-		return <h4>{errMsg}</h4>;
-	}
+function RenderCard({ item }) {
 	return (
 		<Card>
 			<CardImg src={item.image} alt={item.name} />
@@ -30,20 +14,11 @@ function RenderCard({ item, isLoading, errMsg }) {
 }
 
 function Home(props) {
-	const { isLoading, errMsg } = useSelector((state) => state.dishes);
-	const dispatch = useDispatch();
-	useEffect(() => {
-		setTimeout(() => {
-			dispatch(getDishes());
-		}, 2000);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
 	return (
 		<div className="container">
 			<div className="row align-items-start">
 				<div className="col-12 col-md m-1">
-					<RenderCard item={props.dish} isLoading={isLoading} errMsg={errMsg} />
+					<RenderCard item={props.dish} />
 				</div>
 				<div className="col-12 col-md m-1">
 					<RenderCard item={props.promotion} />

@@ -19,11 +19,10 @@ function Main() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		setTimeout(() => {
-			dispatch(getDishes());
-		}, 2000);
+		dispatch(getDishes());
+
 		//eslint-disable-next-line
-	}, []);
+	}, [dispatch]);
 	const DishWithId = () => {
 		let { dishId } = useParams();
 		return (
@@ -34,7 +33,17 @@ function Main() {
 		);
 	};
 	if (isLoading) {
-		return <Loading />;
+		return (
+			<>
+				<div className="container">
+					<div className="text-center loading">
+						<div>
+							<Loading />
+						</div>
+					</div>
+				</div>
+			</>
+		);
 	}
 	return (
 		<div>

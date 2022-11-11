@@ -24,10 +24,6 @@ const Contact = () => {
 					</BreadcrumbItem>
 					<BreadcrumbItem active>Contact Us</BreadcrumbItem>
 				</Breadcrumb>
-				<div className="col-12">
-					<h3>Menu</h3>
-					<hr />
-				</div>
 			</div>
 			<div className="row row-content">
 				<div className="col-12">
