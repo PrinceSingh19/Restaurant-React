@@ -27,7 +27,6 @@ export const dishesSlice = createSlice({
 			state.isLoading = true;
 		},
 		[getDishes.fulfilled]: (state, action) => {
-			console.log(action);
 			state.isLoading = false;
 			state.dishes = action.payload;
 		},

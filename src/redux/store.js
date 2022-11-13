@@ -2,7 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import dishesReducer from "./stateSlices/dishesSlice";
 import commentsReducer from "./stateSlices/commentsSlice";
 import leadersReducer from "./stateSlices/leadersSlice";
-import promotionsReducer from "./stateSlices//promotionsSlice";
+import promotionsReducer from "./stateSlices/promotionsSlice";
+import formsReducer from "./stateSlices/forms";
 
 export default configureStore({
 	reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
 		comments: commentsReducer,
 		leaders: leadersReducer,
 		promotions: promotionsReducer,
+		forms: formsReducer,
 	},
 });

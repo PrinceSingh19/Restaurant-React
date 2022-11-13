@@ -2,18 +2,40 @@ import React from "react";
 import { Breadcrumb, BreadcrumbItem, Button, FormGroup, Label, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { afterSubmit } from "../redux/stateSlices/forms";
+import { useDispatch } from "react-redux";
+import useFormPersist from "react-hook-form-persist";
 
 const Contact = () => {
 	const {
 		register,
 		formState: { errors },
 		handleSubmit,
+		setValue,
+		watch,
 		reset,
 	} = useForm();
 
+	const dispatch = useDispatch();
+
+	const initialState = {
+		firstname: "",
+		lastname: "",
+		telnum: "",
+		email: "",
+		agree: false,
+		contactType: "Tel.",
+		message: "",
+	};
+	useFormPersist("form", {
+		watch,
+		setValue,
+		storage: window.sessionStorage, // default window.sessionStorage
+	});
+
 	const onSubmit = (data) => {
-		console.log(data);
-		reset();
+		dispatch(afterSubmit(data));
+		reset(initialState);
 	};
 	return (
 		<div className="container">
@@ -81,7 +103,6 @@ const Contact = () => {
 									className="form-control"
 									placeholder="First Name"
 									autoComplete="off"
-									defaultValue=""
 									{...register("firstname", { required: true, minLength: "4" })}
 								/>
 								<small className="form-text text-danger">

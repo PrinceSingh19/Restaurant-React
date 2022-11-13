@@ -22,7 +22,7 @@ function Main() {
 		dispatch(getDishes());
 
 		//eslint-disable-next-line
-	}, [dispatch]);
+	}, []);
 	const DishWithId = () => {
 		let { dishId } = useParams();
 		return (
