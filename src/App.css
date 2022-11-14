@@ -82,14 +82,3 @@ h3 > a {
 .modal-content .modal-body {
 	background: none;
 }
-
-.loading {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-}
-.paraLoading {
-	position: relative;
-	margin: 0;
-	padding: 0;
-}

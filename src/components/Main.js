@@ -9,20 +9,24 @@ import Contact from "./Contact";
 import Aboutus from "./Aboutus";
 import { useDispatch, useSelector } from "react-redux";
 import { getDishes } from "../redux/stateSlices/dishesSlice";
-import { Loading } from "./Loading";
+import { getPromos } from "../redux/stateSlices/promotionsSlice";
+import { getComments } from "../redux/stateSlices/commentsSlice";
 
 function Main() {
-	const { dishes, isLoading } = useSelector((state) => state.dishes);
+	const { dishes } = useSelector((state) => state.dishes);
 	const { leaders } = useSelector((state) => state.leaders);
 	const { promotions } = useSelector((state) => state.promotions);
 	const { comments } = useSelector((state) => state.comments);
 	const dispatch = useDispatch();
-
+	console.log(promotions);
 	useEffect(() => {
 		dispatch(getDishes());
+		dispatch(getPromos());
+		dispatch(getComments());
 
 		//eslint-disable-next-line
 	}, []);
+
 	const DishWithId = () => {
 		let { dishId } = useParams();
 		return (
@@ -32,19 +36,7 @@ function Main() {
 			/>
 		);
 	};
-	if (isLoading) {
-		return (
-			<>
-				<div className="container">
-					<div className="text-center loading">
-						<div>
-							<Loading />
-						</div>
-					</div>
-				</div>
-			</>
-		);
-	}
+
 	return (
 		<div>
 			<Header />

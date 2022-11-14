@@ -1,16 +1,30 @@
-import { COMMENTS } from "../../shared/comments";
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { baseUrl } from "../../shared/baseUrl";
+import { createSlice, nanoid, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
-	comments: COMMENTS,
+	commLoading: true,
+	errComm: null,
+	comments: [],
 };
 
+export const getComments = createAsyncThunk(
+	"comments/getComments",
+	async (_, { rejectWithValue }) => {
+		try {
+			const res = await fetch(baseUrl + "comments");
+			const data = await res.json();
+			return data;
+		} catch (err) {
+			return rejectWithValue("Oops could not get comments");
+		}
+	}
+);
 export const commentsSlice = createSlice({
 	name: "comments",
 	initialState,
 	reducers: {
 		addComment: {
-			reducer: (state = initialState.comments, action) => {
+			reducer: (state, action) => {
 				state.comments = state.comments.concat(action.payload);
 			},
 			prepare: (value) => {
@@ -22,6 +36,19 @@ export const commentsSlice = createSlice({
 					},
 				};
 			},
+		},
+	},
+	extraReducers: {
+		[getComments.pending]: (state) => {
+			state.commLoading = true;
+		},
+		[getComments.fulfilled]: (state, action) => {
+			state.commLoading = false;
+			state.comments = action.payload;
+		},
+		[getComments.rejected]: (state, action) => {
+			state.commLoading = false;
+			state.errComm = action.payload;
 		},
 	},
 });

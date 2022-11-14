@@ -9,13 +9,16 @@ import {
 	BreadcrumbItem,
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import { Loading } from "./Loading";
 import SubmitComment from "./SubmitComment";
+import { baseUrl } from "../shared/baseUrl";
+import { useSelector } from "react-redux";
 
 function RenderDish({ dish }) {
 	return (
 		<div>
 			<Card>
-				<CardImg src={dish.image} alt={dish.description} width="100%"></CardImg>
+				<CardImg src={baseUrl + dish.image} alt={dish.description} width="100%"></CardImg>
 				<CardBody>
 					<CardTitle>{dish.name}</CardTitle>
 					<CardText>{dish.description}</CardText>
@@ -25,8 +28,25 @@ function RenderDish({ dish }) {
 	);
 }
 
-function RenderComments({ comments, commentsName }) {
+function RenderComments({ comments, loading, error }) {
 	const dishId = comments.map((x) => x.dishId)[0];
+	if (loading) {
+		return (
+			<>
+				<div className="container">
+					<div className="row text-center">
+						<div>
+							<Loading />
+						</div>
+					</div>
+				</div>
+			</>
+		);
+	}
+	if (error) {
+		return <h5>{error}</h5>;
+	}
+
 	if (comments != null) {
 		return (
 			<>
@@ -53,6 +73,8 @@ function RenderComments({ comments, commentsName }) {
 	}
 }
 const Dishdetail = (props) => {
+	const { commLoading, errComm } = useSelector((state) => state.comments);
+
 	if (props.dish != null) {
 		return (
 			<div className="container ">
@@ -74,7 +96,7 @@ const Dishdetail = (props) => {
 					</div>
 
 					<div className="col-12 col-sm-5 col-md-5 m-1">
-						<RenderComments comments={props.comments} />
+						<RenderComments comments={props.comments} loading={commLoading} error={errComm} />
 						{/* 	<button className="btn btn-secondary" onClick={renderSubmitComment}>
 							Submit Comment
 						</button> */}

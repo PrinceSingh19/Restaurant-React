@@ -1,4 +1,4 @@
-import { DISHES } from "../../shared/dishes";
+import { baseUrl } from "../../shared/baseUrl";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -7,12 +7,14 @@ const initialState = {
 	dishes: [],
 };
 
-export const getDishes = createAsyncThunk("dishes/getDishes", () => {
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			resolve(DISHES);
-		}, 2000);
-	});
+export const getDishes = createAsyncThunk("dishes/getDishes", async (_, { rejectWithValue }) => {
+	try {
+		const res = await fetch(baseUrl + "dishes");
+		const data = await res.json();
+		return data;
+	} catch (err) {
+		return rejectWithValue("Oops could not get Dishes");
+	}
 });
 export const dishesSlice = createSlice({
 	name: "dishes",
