@@ -11,9 +11,15 @@ export const getDishes = createAsyncThunk("dishes/getDishes", async (_, { reject
 	try {
 		const res = await fetch(baseUrl + "dishes");
 		const data = await res.json();
+		if (!res.ok) {
+			var error = new Error("Error " + res.status + ": " + res.statusText);
+			error.res = res;
+			throw error;
+		}
+		console.log(data);
 		return data;
 	} catch (err) {
-		return rejectWithValue("Oops could not get Dishes");
+		return rejectWithValue(err.message);
 	}
 });
 export const dishesSlice = createSlice({

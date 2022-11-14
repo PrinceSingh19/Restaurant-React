@@ -13,10 +13,15 @@ export const getPromos = createAsyncThunk(
 		try {
 			const res = await fetch(baseUrl + "promotions");
 			const data = await res.json();
+			if (!res.ok) {
+				var error = new Error("Error " + res.status + ": " + res.statusText);
+				error.res = res;
+				throw error;
+			}
 			console.log(data);
 			return data;
 		} catch (err) {
-			return rejectWithValue("Oops could not get Promotions");
+			return rejectWithValue(err.message);
 		}
 	}
 );
