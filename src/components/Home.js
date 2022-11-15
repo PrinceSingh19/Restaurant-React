@@ -1,8 +1,10 @@
 import React from "react";
-import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from "reactstrap";
+import { useSelector } from "react-redux";
+
 import { baseUrl } from "../shared/baseUrl";
 import { Loading } from "./Loading";
-import { useSelector } from "react-redux";
+
+import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 
 function RenderCard({ item, isLoading, isError }) {
 	if (isLoading) {

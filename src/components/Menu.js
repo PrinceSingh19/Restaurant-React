@@ -1,9 +1,11 @@
 import React from "react";
-import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem } from "reactstrap";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 import { baseUrl } from "../shared/baseUrl";
 import { Loading } from "./Loading";
-import { useSelector } from "react-redux";
+
+import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem } from "reactstrap";
 
 function RenderMenuItem({ dish }) {
 	return (
@@ -20,7 +22,6 @@ function RenderMenuItem({ dish }) {
 
 const Menu = (props) => {
 	const { isLoading, errMsg } = useSelector((state) => state.dishes);
-
 	const menu = Object.values(props.dishes).map((dish) => {
 		return (
 			<div className="col-12 col-sm-5 col-md-5 m-1" key={dish.id}>

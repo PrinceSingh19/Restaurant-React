@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Button, Modal, ModalHeader, ModalBody } from "reactstrap";
-import { addComment } from "../redux/stateSlices/commentsSlice";
+import { addComment, postComments } from "../redux/stateSlices/commentsSlice";
 
 function SubmitComment(props) {
 	const [modal, setModal] = useState(false);
@@ -15,10 +15,19 @@ function SubmitComment(props) {
 		handleSubmit,
 	} = useForm();
 
-	const onSubmit = (data) => {
-		console.log(data);
-		const { rating, author, comment } = data;
-		dispatch(addComment({ dishId, rating, author, comment }));
+	const onSubmit = async (data) => {
+		const { comment, author, rating } = data;
+		// Sending input data in form to the server
+		try {
+			await dispatch(postComments({ dishId, comment, author, rating })).unwrap();
+		} catch (err) {
+			return err.message;
+		}
+		/* displaying comments after the input data is send to server after which retreiving data from server 
+		 in commentSlice using addComment and diplaying the updated comments
+		Here I purposely did not dispatched addComment after postComments by chaining b/c addComment was getting
+		 executed first and then postComments due to async function */
+		dispatch(addComment());
 	};
 
 	return (

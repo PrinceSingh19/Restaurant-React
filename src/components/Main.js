@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Routes, Route, Navigate, useParams } from "react-router-dom";
+
 import Home from "./Home";
 import Menu from "./Menu";
 import Header from "./Header";
 import Footer from "./Footer";
 import Dishdetail from "./Dishdetail";
-import { Routes, Route, Navigate, useParams } from "react-router-dom";
 import Contact from "./Contact";
 import Aboutus from "./Aboutus";
-import { useDispatch, useSelector } from "react-redux";
+
 import { getDishes } from "../redux/stateSlices/dishesSlice";
 import { getPromos } from "../redux/stateSlices/promotionsSlice";
 import { getComments } from "../redux/stateSlices/commentsSlice";
@@ -18,12 +20,11 @@ function Main() {
 	const { promotions } = useSelector((state) => state.promotions);
 	const { comments } = useSelector((state) => state.comments);
 	const dispatch = useDispatch();
-	console.log(promotions);
+
 	useEffect(() => {
 		dispatch(getDishes());
 		dispatch(getPromos());
 		dispatch(getComments());
-
 		//eslint-disable-next-line
 	}, []);
 

@@ -16,7 +16,7 @@ export const getDishes = createAsyncThunk("dishes/getDishes", async (_, { reject
 			error.res = res;
 			throw error;
 		}
-		console.log(data);
+		//console.log(data);
 		return data;
 	} catch (err) {
 		return rejectWithValue(err.message);

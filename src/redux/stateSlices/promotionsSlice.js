@@ -18,7 +18,6 @@ export const getPromos = createAsyncThunk(
 				error.res = res;
 				throw error;
 			}
-			console.log(data);
 			return data;
 		} catch (err) {
 			return rejectWithValue(err.message);

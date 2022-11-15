@@ -43,6 +43,8 @@ export default class Header extends Component {
 
 	handleLogin(event) {
 		this.toggleModal();
+		// functilnality where on click login button alert values entered by the user
+		// also it is implemented as uncontrolled form
 		alert(
 			"Username: " +
 				this.username.value +
@@ -154,14 +156,6 @@ export default class Header extends Component {
 							</Button>
 						</Form>
 					</ModalBody>
-					{/* <ModalFooter>
-						<Button color="primary" onClick={toggle}>
-							Do Something
-						</Button>{" "}
-						<Button color="secondary" onClick={toggle}>
-							Cancel
-						</Button>
-					</ModalFooter> */}
 				</Modal>
 			</>
 		);

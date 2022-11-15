@@ -1,10 +1,12 @@
 import React from "react";
-import { Breadcrumb, BreadcrumbItem, Button, FormGroup, Label, Col } from "reactstrap";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { afterSubmit } from "../redux/stateSlices/forms";
-import { useDispatch } from "react-redux";
 import useFormPersist from "react-hook-form-persist";
+
+import { afterSubmit } from "../redux/stateSlices/forms";
+
+import { Breadcrumb, BreadcrumbItem, Button, FormGroup, Label, Col } from "reactstrap";
 
 const Contact = () => {
 	const {

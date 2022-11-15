@@ -1,7 +1,9 @@
 import React from "react";
-import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader } from "reactstrap";
 import { Link } from "react-router-dom";
 
+import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader } from "reactstrap";
+
+// rendering the leaders on aboutus page
 function Aboutus(props) {
 	const RenderLeader = ({ leadersDesc }) => {
 		const leaderDescription = leadersDesc.map((leader) => {

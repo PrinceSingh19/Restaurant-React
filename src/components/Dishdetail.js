@@ -1,4 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+import SubmitComment from "./SubmitComment";
+import { Loading } from "./Loading";
+import { baseUrl } from "../shared/baseUrl";
+
 import {
 	Card,
 	CardBody,
@@ -8,11 +15,6 @@ import {
 	Breadcrumb,
 	BreadcrumbItem,
 } from "reactstrap";
-import { Link } from "react-router-dom";
-import { Loading } from "./Loading";
-import SubmitComment from "./SubmitComment";
-import { baseUrl } from "../shared/baseUrl";
-import { useSelector } from "react-redux";
 
 function RenderDish({ dish }) {
 	return (
@@ -29,6 +31,7 @@ function RenderDish({ dish }) {
 }
 
 function RenderComments({ comments, loading, error }) {
+	// filetering dishId of the current selected dish which I will get as props from Main component
 	const dishId = comments.map((x) => x.dishId)[0];
 	if (loading) {
 		return (
@@ -72,6 +75,7 @@ function RenderComments({ comments, loading, error }) {
 		return <div></div>;
 	}
 }
+
 const Dishdetail = (props) => {
 	const { commLoading, errComm } = useSelector((state) => state.comments);
 
@@ -97,9 +101,6 @@ const Dishdetail = (props) => {
 
 					<div className="col-12 col-sm-5 col-md-5 m-1">
 						<RenderComments comments={props.comments} loading={commLoading} error={errComm} />
-						{/* 	<button className="btn btn-secondary" onClick={renderSubmitComment}>
-							Submit Comment
-						</button> */}
 					</div>
 				</div>
 			</div>
