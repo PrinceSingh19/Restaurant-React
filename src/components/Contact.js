@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useFormPersist from "react-hook-form-persist";
 
-import { afterSubmit } from "../redux/stateSlices/forms";
+import { getForms, getValues, postForms } from "../redux/stateSlices/forms";
 
 import { Breadcrumb, BreadcrumbItem, Button, FormGroup, Label, Col } from "reactstrap";
 
@@ -35,9 +35,24 @@ const Contact = () => {
 		storage: window.sessionStorage, // default window.sessionStorage
 	});
 
-	const onSubmit = (data) => {
-		dispatch(afterSubmit(data));
-		reset(initialState);
+	const onSubmit = async (data) => {
+		const { firstname, lastname, telnum, email, agree, contactType, message } = data;
+
+		try {
+			/*
+			Here first dispatching the postForms action after clicking on submit button then
+			clearing the form fields
+			later initiating the getForms request and fetching the data enterd by user from server
+			and last alerting the updated data fetched from server to the user after submission
+			*/
+			await dispatch(postForms({ firstname, lastname, telnum, email, agree, contactType, message }))
+				.unwrap()
+				.then(() => reset(initialState))
+				.then(() => dispatch(getForms()))
+				.then(() => dispatch(getValues()));
+		} catch (error) {
+			return error.message;
+		}
 	};
 	return (
 		<div className="container">

@@ -39,18 +39,19 @@ function RenderCard({ item, isLoading, isError }) {
 function Home(props) {
 	const { isLoading, errMsg } = useSelector((state) => state.dishes);
 	const { promoLoading, errPromo } = useSelector((state) => state.promotions);
+	const { leadersLoading, errLeaders } = useSelector((state) => state.leaders);
 
 	return (
 		<div className="container">
 			<div className="row ">
-				<div className="col-12 col-md m-1 d-flex align-items-center">
+				<div className="col-12 col-md m-1 ">
 					<RenderCard item={props.dish} isLoading={isLoading} isError={errMsg} />
 				</div>
-				<div className="col-12 col-md m-1 d-flex align-items-center">
+				<div className="col-12 col-md m-1 ">
 					<RenderCard item={props.promotion} isLoading={promoLoading} isError={errPromo} />
 				</div>
-				<div className="col-12 col-md m-1">
-					<RenderCard item={props.leader} />
+				<div className="col-12 col-md m-1 ">
+					<RenderCard item={props.leader} isLoading={leadersLoading} isError={errLeaders} />
 				</div>
 			</div>
 		</div>

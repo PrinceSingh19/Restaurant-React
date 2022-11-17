@@ -1,11 +1,16 @@
 import React from "react";
+import { useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
 
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader } from "reactstrap";
+import { Loading } from "./Loading";
 
 // rendering the leaders on aboutus page
 function Aboutus(props) {
-	const RenderLeader = ({ leadersDesc }) => {
+	const { leadersLoading, errLeaders } = useSelector((state) => state.leaders);
+
+	const RenderLeader = ({ leadersDesc, leader, error }) => {
 		const leaderDescription = leadersDesc.map((leader) => {
 			return (
 				<div className="container" key={leader.id} style={{ marginBottom: 20 }}>
@@ -28,6 +33,7 @@ function Aboutus(props) {
 				</div>
 			);
 		});
+
 		return leaderDescription;
 	};
 
@@ -102,7 +108,19 @@ function Aboutus(props) {
 				</div>
 				<div className="col-12">
 					<div>
-						<RenderLeader leadersDesc={props.leaders} />
+						{leadersLoading ? (
+							<h4 className="text-center">
+								<Loading />
+							</h4>
+						) : errLeaders ? (
+							<h4>{errLeaders}</h4>
+						) : (
+							<RenderLeader
+								leadersDesc={props.leaders}
+								loading={leadersLoading}
+								error={errLeaders}
+							/>
+						)}
 					</div>
 				</div>
 			</div>

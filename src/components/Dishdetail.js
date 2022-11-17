@@ -30,25 +30,9 @@ function RenderDish({ dish }) {
 	);
 }
 
-function RenderComments({ comments, loading, error }) {
+function RenderComments({ comments }) {
 	// filetering dishId of the current selected dish which I will get as props from Main component
 	const dishId = comments.map((x) => x.dishId)[0];
-	if (loading) {
-		return (
-			<>
-				<div className="container">
-					<div className="row text-center">
-						<div>
-							<Loading />
-						</div>
-					</div>
-				</div>
-			</>
-		);
-	}
-	if (error) {
-		return <h5>{error}</h5>;
-	}
 
 	if (comments != null) {
 		return (
@@ -77,8 +61,24 @@ function RenderComments({ comments, loading, error }) {
 }
 
 const Dishdetail = (props) => {
-	const { commLoading, errComm } = useSelector((state) => state.comments);
+	const { isLoading, errMsg } = useSelector((state) => state.dishes);
 
+	if (isLoading) {
+		return (
+			<>
+				<div className="container">
+					<div className="row text-center">
+						<div>
+							<Loading />
+						</div>
+					</div>
+				</div>
+			</>
+		);
+	}
+	if (errMsg) {
+		return <h5>{errMsg}</h5>;
+	}
 	if (props.dish != null) {
 		return (
 			<div className="container ">
@@ -100,7 +100,7 @@ const Dishdetail = (props) => {
 					</div>
 
 					<div className="col-12 col-sm-5 col-md-5 m-1">
-						<RenderComments comments={props.comments} loading={commLoading} error={errComm} />
+						<RenderComments comments={props.comments} />
 					</div>
 				</div>
 			</div>

@@ -13,6 +13,7 @@ import Aboutus from "./Aboutus";
 import { getDishes } from "../redux/stateSlices/dishesSlice";
 import { getPromos } from "../redux/stateSlices/promotionsSlice";
 import { getComments } from "../redux/stateSlices/commentsSlice";
+import { getLeaders } from "../redux/stateSlices/leadersSlice";
 
 function Main() {
 	const { dishes } = useSelector((state) => state.dishes);
@@ -25,6 +26,7 @@ function Main() {
 		dispatch(getDishes());
 		dispatch(getPromos());
 		dispatch(getComments());
+		dispatch(getLeaders());
 		//eslint-disable-next-line
 	}, []);
 
