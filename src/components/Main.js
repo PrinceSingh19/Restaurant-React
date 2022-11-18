@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Routes, Route, Navigate, useParams } from "react-router-dom";
+import { Routes, Route, Navigate, useParams, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
 import Home from "./Home";
 import Menu from "./Menu";
@@ -21,6 +22,7 @@ function Main() {
 	const { promotions } = useSelector((state) => state.promotions);
 	const { comments } = useSelector((state) => state.comments);
 	const dispatch = useDispatch();
+	const location = useLocation();
 
 	useEffect(() => {
 		dispatch(getDishes());
@@ -43,23 +45,25 @@ function Main() {
 	return (
 		<div>
 			<Header />
-			<Routes>
-				<Route
-					path="/home"
-					element={
-						<Home
-							dish={dishes.filter((dish) => dish.featured)[0]}
-							promotion={promotions.filter((promo) => promo.featured)[0]}
-							leader={leaders.filter((leader) => leader.featured)[0]}
-						/>
-					}
-				/>
-				<Route exact path="/menu" element={<Menu dishes={dishes} />} />
-				<Route exact path="/menu/:dishId" element={<DishWithId />} />
-				<Route path="/contactus" element={<Contact />} />
-				<Route path="/aboutus" element={<Aboutus leaders={leaders} />} />
-				<Route path="/" element={<Navigate replace to="/home" />} />
-			</Routes>
+			<AnimatePresence initial={false} mode="sync">
+				<Routes location={location} key={location.pathname}>
+					<Route
+						path="/home"
+						element={
+							<Home
+								dish={dishes.filter((dish) => dish.featured)[0]}
+								promotion={promotions.filter((promo) => promo.featured)[0]}
+								leader={leaders.filter((leader) => leader.featured)[0]}
+							/>
+						}
+					/>
+					<Route exact path="/menu" element={<Menu dishes={dishes} />} />
+					<Route exact path="/menu/:dishId" element={<DishWithId />} />
+					<Route path="/contactus" element={<Contact />} />
+					<Route path="/aboutus" element={<Aboutus leaders={leaders} />} />
+					<Route path="/" element={<Navigate replace to="/home" />} />
+				</Routes>
+			</AnimatePresence>
 			<Footer />
 		</div>
 	);

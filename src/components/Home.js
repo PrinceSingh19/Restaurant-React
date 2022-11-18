@@ -7,6 +7,31 @@ import { Loading } from "./Loading";
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from "reactstrap";
 import { motion } from "framer-motion";
 
+const newVariants = {
+	hidden: {
+		opacity: 0,
+		scale: 0,
+		x: "1000vw",
+	},
+	visible: {
+		scale: 1,
+		opacity: 1,
+		x: 0,
+		transition: {
+			duration: 0.5,
+			type: "tween",
+			stiffness: 200,
+		},
+	},
+	exit: {
+		x: "-1000vw",
+		opacity: 0,
+		transition: {
+			ease: "easeIn",
+			duration: 0.5,
+		},
+	},
+};
 function RenderCard({ item, isLoading, isError }) {
 	if (isLoading) {
 		return (
@@ -26,21 +51,7 @@ function RenderCard({ item, isLoading, isError }) {
 	}
 
 	return (
-		<motion.div
-			initial="hidden"
-			whileInView="visible"
-			viewport={{ once: true }}
-			//transition={{ duration: 1 }}
-			//animate={{ opacity: 0 }}
-			transition={{ fadeIn: [0.17, 0.67, 0.83, 0.67], duration: 1 }}
-			variants={{
-				visible: {
-					opacity: [0.17, 0.67, 0.83, 1],
-					scale: 1,
-				},
-				hidden: { opacity: 0, scale: 0 },
-			}}
-		>
+		<motion.div variants={newVariants} initial="hidden" animate="visible">
 			<Card>
 				<CardImg src={baseUrl + item.image} alt={item.name} />
 				<CardBody>
@@ -57,23 +68,6 @@ function Home(props) {
 	const { isLoading, errMsg } = useSelector((state) => state.dishes);
 	const { promoLoading, errPromo } = useSelector((state) => state.promotions);
 	const { leadersLoading, errLeaders } = useSelector((state) => state.leaders);
-
-	/* if (isLoading || promoLoading || leadersLoading) {
-		return (
-			<>
-				<div className="container">
-					<div className="row">
-						<div>
-							<Loading />
-						</div>
-					</div>
-				</div>
-			</>
-		);
-	}
-	if (errMsg || errLeaders || errPromo) {
-		return <h5>{errMsg}</h5>;
-	} */
 
 	return (
 		<div className="container">

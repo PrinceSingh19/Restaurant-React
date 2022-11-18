@@ -6,6 +6,31 @@ import { baseUrl } from "../shared/baseUrl";
 import { Loading } from "./Loading";
 
 import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem } from "reactstrap";
+import { motion } from "framer-motion";
+
+const newVariants = {
+	hidden: {
+		opacity: 0,
+		scale: 0,
+		x: "1000vw",
+	},
+	visible: {
+		scale: 1,
+		opacity: 1,
+		x: 0,
+		transition: {
+			duration: 0.5,
+		},
+	},
+	exit: {
+		x: "-1000vw",
+		opacity: 0,
+		transition: {
+			ease: "easeIn",
+			duration: 0.5,
+		},
+	},
+};
 
 function RenderMenuItem({ dish }) {
 	return (
@@ -47,7 +72,13 @@ const Menu = (props) => {
 		return <h5>{errMsg}</h5>;
 	}
 	return (
-		<div className="container">
+		<motion.div
+			className="container"
+			variants={newVariants}
+			initial="hidden"
+			animate="visible"
+			exit="exit"
+		>
 			<div className="row">
 				<Breadcrumb>
 					<BreadcrumbItem>
@@ -61,7 +92,7 @@ const Menu = (props) => {
 				</div>
 			</div>
 			<div className="row">{menu}</div>
-		</div>
+		</motion.div>
 	);
 };
 

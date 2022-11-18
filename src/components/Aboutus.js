@@ -4,16 +4,54 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader } from "reactstrap";
+import { motion } from "framer-motion";
 import { Loading } from "./Loading";
+
+const newVariants = {
+	hidden: {
+		opacity: 0,
+		scale: 0,
+		x: "1000vw",
+	},
+	visible: {
+		scale: 1,
+		opacity: 1,
+		x: 0,
+		transition: {
+			duration: 0.5,
+		},
+	},
+	exit: {
+		x: "-1000vw",
+		opacity: 0,
+		transition: {
+			ease: "easeIn",
+			duration: 0.5,
+		},
+	},
+};
 
 // rendering the leaders on aboutus page
 function Aboutus(props) {
 	const { leadersLoading, errLeaders } = useSelector((state) => state.leaders);
 
-	const RenderLeader = ({ leadersDesc, leader, error }) => {
-		const leaderDescription = leadersDesc.map((leader) => {
+	const RenderLeader = ({ leadersDesc }) => {
+		const leaderDescription = leadersDesc.map((leader, i) => {
 			return (
-				<div className="container" key={leader.id} style={{ marginBottom: 20 }}>
+				<motion.div
+					className="container"
+					key={leader.id}
+					style={{ marginBottom: 20 }}
+					variants={{
+						visible: { opacity: 1, scale: 1, y: 0 },
+						hidden: { opacity: 0, scale: 0, y: -20 },
+					}}
+					initial="hidden"
+					animate="visible"
+					transition={{ duration: 0.3, delay: 0.3 * i, type: "spring", velocity: 2 }}
+					whileInView="visible"
+					viewport={{ once: true }}
+				>
 					<div className="row">
 						<div className="col-sm-2 ">
 							<img src="/assets/images/alberto.png" alt="Alberto Del Rio" />
@@ -30,7 +68,7 @@ function Aboutus(props) {
 							</div>
 						</div>
 					</div>
-				</div>
+				</motion.div>
 			);
 		});
 
@@ -38,7 +76,13 @@ function Aboutus(props) {
 	};
 
 	return (
-		<div className="container">
+		<motion.div
+			className="container"
+			variants={newVariants}
+			initial="hidden"
+			animate="visible"
+			exit="exit"
+		>
 			<div className="row">
 				<Breadcrumb>
 					<BreadcrumbItem>
@@ -124,7 +168,7 @@ function Aboutus(props) {
 					</div>
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 }
 
