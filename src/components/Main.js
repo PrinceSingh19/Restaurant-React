@@ -33,7 +33,7 @@ function Main() {
 	}, []);
 
 	const DishWithId = () => {
-		let { dishId } = useParams();
+		let { dishId } = useParams(); // getting id of the selected dish on Menu page
 		return (
 			<Dishdetail
 				dish={dishes.filter((dish) => dish.id === parseInt(dishId, 10))[0]}
@@ -46,6 +46,8 @@ function Main() {
 		<div>
 			<Header />
 			<AnimatePresence initial={false} mode="sync">
+				{" "}
+				{/* // using AnimatePresence to apply the animation on page transition */}
 				<Routes location={location} key={location.pathname}>
 					<Route
 						path="/home"

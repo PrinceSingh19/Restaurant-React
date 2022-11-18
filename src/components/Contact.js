@@ -53,6 +53,7 @@ const Contact = () => {
 		contactType: "Tel.",
 		message: "",
 	};
+	// using useFormPersist to save the data when user fills data partially and navigates to other page
 	useFormPersist("form", {
 		watch,
 		setValue,
