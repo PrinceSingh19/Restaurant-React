@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+<h1>Ristorante Con Fusion: A React Website</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h5>Technology Used:</h5>
+<ul>
+  <li>HTML/HTML5</li>
+  <li>CSS/CSS3</li>
+  <li>JavaScript</li>
+  <li>BootStrap</li>
+  <li>ReactStrap</li>
+  <li>React</li>
+  <li>React-router</li>
+  <li>Redux-toolkit</li>
+</ul>
+<h5>Tools Used:</h5>
+<ul>
+  <li>NPM: Package Manager</li>
+  <li>WebPack</li>
+  <li>react-scripts</li>
+  <li>json-server</li>
+</ul>
 
-## Available Scripts
+<h5>Quick Start<h5>
+<p>
+<li>To clone: https://github.com/PrinceSingh19/BootStrap-build-with-Gulp-task-runner.git <span>:floppy_disk:</span></li>
+<li><span>:computer:</span></To install: npm install li>
+<li><span>:computer:</span>To run: npm start </li>
+<li>:airplane: To build: npm run build</li>
+<caption>After downloading the project start JSON server and it will serve db.json file</caption>
+<li>To run json-server: json-server --watch jsonDataBaseName -d 2000 -p portNumber  </li>
+</p>
 
-In the project directory, you can run:
+<h5>Introduction</h5>
+<p>This project contains application for a restaurant called Ristorante Con Fusion.
+This is my first react project. To implement this project, I have used above mentioned tools and technologies. This react application contains reusable code components. It has various pages like Home which contains details of trending dishes and promotions available on website, About Us which describes history and leader details, Menu showing the menu items available and submitting the comments and last contact us having the form to submit the details to contact. The description of the technolgies used and their implementations is mentioned in below <a href="#description">Project Description</a> Section</p>
 
-### `npm start`
+<h5>:dart: Salient Features </h5>
+<ol>
+    <li>Reusable code components</li>
+    <li>State management using redux-toolkit</li>
+    <li>get request using fetch api and redux thunk asynchronously</li>
+    <li>post request using fetch api and redux thunk asynchronously</li>
+    <li>Handling error when fetching data from server</li>
+    <li>React animations</li>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+</ol>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<h5>:open_book: Project Description</h5>
+<p> The brief decription of the above mentioned technologies in the project is as follows:<br>
 
-### `npm test`
+<b>React:</b> The project uses react version 18.2. I have implemented components using both the approaches i.e. Class based and functional based.<br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<b>React-router:</b> To link the various pages in application and provide the easy navigation. <br>
 
-### `npm run build`
+<b>BootStrap/ReactStrap:</b> To implement the responsive web design.<br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<b>Redux-toolkit:</b> To have centralized state management of application.<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<b>Framer-motion:</b> To implement the eye-catiching animations in application. <br>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<b>JSON-server:</b> To simulate the data fetching experience from API. <br>
+<strong>Note:</strong>To run this project open the JSON-server folder which contains db.json and public folder in which it contains images, into terminal and type json-server --watch db.json -d 2000 -p 3001 because by default npm start will use the port 3000.
 
-### `npm run eject`
+</p>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<h5>Credits</h5>
+<p><strong>Coursera</strong> <strong>Jogesh K Muppala</strong></p>
