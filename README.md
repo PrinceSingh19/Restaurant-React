@@ -29,9 +29,8 @@
 <li>To run json-server: json-server --watch jsonDataBaseName -d 2000 -p portNumber  </li>
 </ul>
 
-
 <h3>Introduction</h3>
-<p>This project is based on Coursera's React Course.This project contains application for a restaurant called Ristorante Con Fusion. This is my first react project. To implement this project, I have used above mentioned tools and technologies. This react application contains reusable code components. It has various pages like Home which contains details of trending dishes and promotions available on website, About Us which describes history and leader details, Menu showing the menu items available and submitting the comments and last contact us having the form to submit the details to contact. The description of the technolgies used and their implementations is mentioned in below Project Description Section</p>
+<p>This project is based on Coursera's React Course.In this course, instructor uses the class based based approach and classic redux approach. But I have used latest version of all the dependencies and implemented using functional approach and for redux I have used redux-toolkit. This project contains application for a restaurant called Ristorante Con Fusion. This is my first react project. This react application contains reusable code components. It has various pages like Home which contains details of trending dishes and promotions available on website, About Us which describes history and leader details, Menu showing the menu items available and submitting the comments and last contact us having the form to submit the details to contact. The description of the technolgies used and their implementations is mentioned in below Project Description Section</p>
 
 <h3>:dart: Salient Features </h3>
 <ol>
@@ -66,3 +65,5 @@
 
 <h3>Credits</h3>
 <p><strong>Coursera</strong>, <strong>Jogesh K Muppala</strong></p>
+<br>
+<p>Feel free to connect with me on linkedIn and github.<p>
