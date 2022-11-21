@@ -27,6 +27,8 @@
 <li>:airplane: To build: npm run build</li>
 <caption>After downloading the project start JSON server and it will serve db.json file</caption>
 <li>To run json-server: json-server --watch jsonDataBaseName -d 2000 -p portNumber  </li>
+<hr>
+<p>To deploy the site go to:  <a href="https://github.com/PrinceSingh19/json-server-glitch">JSON server glitch repo </a>and deploy the json server on glitch. After that change the baseUrl in shared folder's baseUrl file to the glitch link. And create a build version and deploy on netlify</p>
 </ul>
 
 <h3>Introduction</h3>
