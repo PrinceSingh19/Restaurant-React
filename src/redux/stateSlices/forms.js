@@ -58,7 +58,7 @@ export const formsSlice = createSlice({
 			console.log(state.feedback);
 			console.log(state);
 			// alerting only the latest data entered by the user after fetching data from server
-			alert(JSON.stringify("Your entered data is: " + state.feedback[state.feedback.length - 1]));
+			alert(JSON.stringify(state.feedback[state.feedback.length - 1]));
 		},
 	},
 	extraReducers: {
